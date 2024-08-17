@@ -11,7 +11,7 @@ using namespace std;
 
 /**
  * Funcion SumaIterativa
- * Calcule la sumatoria de 1 hasta n con un metodo iterativo.
+ * Calcula la sumatoria de 1 hasta n con un metodo iterativo.
  * 
  * @param n entero positivo que indica cuanots numeros han de ser sumados
  * @return entero positovo que muestra la sumatoria de 1 hasta n
@@ -21,6 +21,23 @@ int SumaIterativa (int n){
     for(int i = 1; i <= n; i++){
         sumaTotal += i; 
     } 
+    return sumaTotal;
+}
+/*
+Funcion SumaRecursiva
+Calcula la sumatoria de 1 hasta n utilizando recursion
+
+@param n entero positivo que indica cuantos numeros han de ser sumados
+@return entero positivo que muestra la sumatoria de 1 hasta n
+ */
+int SumaRecursiva(int n){
+    int sumaTotal;
+    if(n <= 1){
+        return n;
+    }
+    else{ 
+        sumaTotal = n + SumaRecursiva(n-1);
+    }
     return sumaTotal;
 }
 
