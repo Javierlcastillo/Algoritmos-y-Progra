@@ -24,9 +24,10 @@ void ImprimeVector(const vector<T> &dato){
 
 /**  
  * Funcion OrdenaIntercambio
- * Ordena en forma ascendente los daots con un metodo de Intercambio
+ * Ordena en forma ascendente los datos con un metodo de Intercambio
+ * despues imprime la nueva 
  * 
- * @param datos vector<int> con n-numeros para hacer el ordenamiento 
+ * @param datos vector<T> con n-numeros para hacer el ordenamiento 
  * @return nada
  * Complejidad de Tiempo:
  * Complejidad de Espacio:
@@ -47,10 +48,34 @@ void OrdenaIntercambio(vector<T> &datos){
     ImprimeVector(datos);
 }
 
+/**  
+ * Funcion OrdenaBurbuja
+ * Ordena en forma ascendente los datos con un metodo de Burbuja
+ * e imprime el vector ordenado.
+ * 
+ * @param datos vector<T> con n-numeros para hacer el ordenamiento 
+ * @return nada
+ * Complejidad de Tiempo:
+ * Complejidad de Espacio:
+*/
 template <class T>
-void OrdenaIntercambio(vector<T> &datos){
-    
+void OrdenaBurbuja(vector<T> datos){
+    int n = datos.size();
+    bool interruptor = true;
+    for (int paso = 0; paso <= n-1 && interruptor; paso++){
+        interruptor = false;
+        for (int j = 0; j < n-1-paso; j++){
+            if (datos[j] > datos[j+1]){
+                T tmp = datos[j];
+                datos[j] = datos[j+1];
+                datos[j+1] = tmp;
+                interruptor = true;
+                ImprimeVector(datos);
+            }
+        }
+    }
 }
+
 int main(){
     vector<int> vec1 = {7, 4, 2, 7, 8, 9, 1};
     cout << "Vector antes del ordenamiento: ";
@@ -58,5 +83,10 @@ int main(){
     cout << endl << "Metodo de Intercambio" << endl << "---------------------" << endl;
     OrdenaIntercambio(vec1);
 
+    vector<int> vec2 = {6, 9, 2, 33, 4, 2, 13, 1, 4, 1};
+    cout << "Vector antes del ordenamiento: ";
+    ImprimeVector(vec2);
+    cout << endl << "Metodo de Burbuja" << endl << "---------------------" << endl;
+    OrdenaBurbuja(vec2);
     return 0;
 }
