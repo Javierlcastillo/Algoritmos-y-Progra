@@ -59,7 +59,7 @@ void OrdenaIntercambio(vector<T> &datos){
  * Complejidad de Espacio:
 */
 template <class T>
-void OrdenaBurbuja(vector<T> datos){
+void OrdenaBurbuja(vector<T> &datos){
     int n = datos.size();
     bool interruptor = true;
     for (int paso = 0; paso <= n-1 && interruptor; paso++){
@@ -70,10 +70,10 @@ void OrdenaBurbuja(vector<T> datos){
                 datos[j] = datos[j+1];
                 datos[j+1] = tmp;
                 interruptor = true;
-                ImprimeVector(datos);
             }
         }
     }
+    ImprimeVector(datos);
 }
 
 int main(){
