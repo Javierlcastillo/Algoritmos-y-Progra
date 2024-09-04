@@ -245,10 +245,22 @@ int main(){
     vec4 = {9, 4, 5, 6, 2, 1, 7, 134, 32};
 
     cout << endl << "Metodo Sort merge" << endl << "---------------------" << endl;
+    cout << "Vector antes del intercambio: ";
+    imprimeVector(vec1);
     mergeSort(vec1, 0, vec1.size()-1);
+    imprimeVector(vec1);
+    cout << "Vector antes del intercambio: ";
+    imprimeVector(vec2);
     mergeSort(vec2, 0, vec2.size()-1);
+    imprimeVector(vec2);
+    cout << "Vector antes del intercambio: ";
+    imprimeVector(vec3);
     mergeSort(vec3, 0, vec3.size()-1);
+    imprimeVector(vec3);
+    cout << "Vector antes del intercambio: ";
+    imprimeVector(vec4);
     mergeSort(vec4, 0, vec4.size()-1);
+    imprimeVector(vec4);
     cout << endl;
 
 
