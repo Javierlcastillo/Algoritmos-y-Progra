@@ -1,7 +1,7 @@
 /**
  * Aplicación en C++ donde dado n numeros de entrada que son almacenados
  * en un vector <int> y realica distintos tipos de ordenamiento:
- * 1) Intercambio, 2) Burbuja, 3) Merge, 4) Sequencial 5) Busqueda Binaria
+ * 1) Intercambio, 2) Burbuja, 3) merge, 4) Sequencial 5) Busqueda Binaria
  * Autor: Javier Luis Castillo Solórzano
  * Matrícula = A01658415
  * Creado: {30-08-2024}
@@ -16,7 +16,7 @@ using namespace std;
  * Complejidad de espacio: O(1)
 */
 template <class T>
-void ImprimeVector(const vector<T> &dato){
+void imprimeVector(const vector<T> &dato){
     int n = dato.size();
     for (int i = 0; i < n; i++){
         cout << dato[i] << " ";
@@ -25,8 +25,8 @@ void ImprimeVector(const vector<T> &dato){
 }
 
 /**  
- * Funcion OrdenaIntercambio
- * Ordena en forma ascendente los datos con un metodo de Intercambio
+ * Funcion ordenaIntercambio
+ * ordena en forma ascendente los datos con un metodo de Intercambio
  * despues imprime la nueva 
  * 
  * @param datos vector<T> con n-numeros para hacer el ordenamiento 
@@ -35,9 +35,9 @@ void ImprimeVector(const vector<T> &dato){
  * Complejidad de Espacio: O(1)
 */
 template <class T>
-void OrdenaIntercambio(vector<T> &datos){
+void ordenaIntercambio(vector<T> &datos){
     cout << "Vector antes del ordenamiento: ";
-    ImprimeVector(datos);
+    imprimeVector(datos);
     int n = datos.size();
     for (int i = 0; i <= n-2; i++){
         for(int j = i+1; j <= n-1; j++){
@@ -49,12 +49,12 @@ void OrdenaIntercambio(vector<T> &datos){
             }
         }
     }
-    ImprimeVector(datos);
+    imprimeVector(datos);
 }
 
 /**  
- * Funcion OrdenaBurbuja
- * Ordena en forma ascendente los datos con un metodo de Burbuja
+ * Funcion ordenaBurbuja
+ * ordena en forma ascendente los datos con un metodo de Burbuja
  * e imprime el vector ordenado.
  * 
  * @param datos vector<T> con n-numeros para hacer el ordenamiento 
@@ -63,9 +63,9 @@ void OrdenaIntercambio(vector<T> &datos){
  * Complejidad de Espacio: O(1)
 */
 template <class T>
-void OrdenaBurbuja(vector<T> &datos){
+void ordenaBurbuja(vector<T> &datos){
     cout << "Vector antes del ordenamiento: ";
-    ImprimeVector(datos);
+    imprimeVector(datos);
     int n = datos.size();
     bool interruptor = true;
     for (int paso = 0; paso <= n-1 && interruptor; paso++){
@@ -79,9 +79,79 @@ void OrdenaBurbuja(vector<T> &datos){
             }
         }
     }
-    ImprimeVector(datos);
+    imprimeVector(datos);
 }
 
+/**  
+ * Funcion merge
+ * divide una matriz por la mitad y ordena cada una ara despes unirlas en orden ascendente
+ * 
+ * @param datos vector<T> con n-numeros para hacer el ordenamiento 
+ * @param left int el inicio de dodne se comiemz a ejecutar el metodo
+ * @param right int el fin hasta donde se ejecuta el metodo 
+ * @return nada
+ * Complejidad de Tiempo: O(n)
+ * Complejidad de Espacio: O(1)
+*/
+template <class T>
+void merge(vector<T> &datos, int left, int mid, int right){
+    int tamano =  right - left + 1;
+
+    int i = left, j = mid + 1, k = 0;
+    vector<T> aux; //creamos vector auxiliar
+
+    while (i <= mid && j <= right){
+        if (datos[i] < datos[j]){
+            //cout << "el Valor:" << aux[k] << endl;
+            aux.push_back(datos[i]);
+            i++;
+            k++;
+        } else {
+            aux.push_back(datos[j]);
+            j++;
+            k++;
+        }
+    }
+
+    while (i <= mid){
+        aux.push_back(datos[i]); 
+        i++;
+        k++;
+    } 
+
+    while (j <= right){
+        aux.push_back(datos[j]);
+        j++;
+        k++;
+    }
+
+    for (int  l = 0; l < tamano; l++) {
+        datos[left + l] = aux[l];
+    }
+}
+
+/**  
+ * Funcion mergeSort
+ * Divide el arreglo recursivamente lo ordena
+ * e imprime el vector ordenado.
+ * 
+ * @param datos vector<T> con n-numeros para hacer el ordenamiento \
+* @param inicio int el inicio de dodne se comiemz a ejecutar el metodo
+ * @param fin int el fin hasta donde se ejecuta el metodo 
+ * @return nada
+ * Complejidad de Tiempo: O(nlogn)
+ * Complejidad de Espacio: O(n)
+*/
+
+template <class T>
+void mergeSort(vector<T> &datos, int inicio, int fin){
+    if (inicio < fin){
+        int mitad = inicio + (fin - inicio) / 2;
+        mergeSort(datos, inicio, mitad);
+        mergeSort(datos, mitad + 1, fin);
+        merge(datos, inicio ,mitad, fin);
+    }
+}
 /**  
  * Funcion BusqSecuencial
  * Encuentra un numero dado en un vector arreglado ascendentemente y devuelve el
@@ -97,7 +167,7 @@ void OrdenaBurbuja(vector<T> &datos){
 template <class T>
 int BusquedaSecuencial(vector<T> &datos, int busqueda){
     cout << "Vector para la busqueda Secuencial de " << busqueda << endl;
-    ImprimeVector(datos);
+    imprimeVector(datos);
     int tamano = datos.size();
     for (int i = 0; i < tamano; i++){
         if (datos[i] == busqueda){
@@ -122,7 +192,7 @@ int BusquedaSecuencial(vector<T> &datos, int busqueda){
 template <class T>
 int BusqBinaria(vector<T> &datos, T key){
     cout << "Vector para la busqueda Binaria de " << key << endl;
-    ImprimeVector(datos);
+    imprimeVector(datos);
     int low = 0; 
     int high = datos.size() - 1;
     bool ans = false;
@@ -151,18 +221,36 @@ int main(){
     vector<int> vec4 = {9, 4, 5, 6, 2, 1, 7, 134, 32};
 
     cout << endl << "Metodo de Intercambio" << endl << "---------------------" << endl;
-    OrdenaIntercambio(vec1);
-    OrdenaIntercambio(vec2);
-    OrdenaIntercambio(vec3);
-    OrdenaIntercambio(vec4);
+    ordenaIntercambio(vec1);
+    ordenaIntercambio(vec2);
+    ordenaIntercambio(vec3);
+    ordenaIntercambio(vec4);
     cout << endl;
 
+    vec1 = {7, 4, 2, 7, 8, 9, 1};
+    vec2 = {6, 9, 2, 33, 4, 2, 13, 1, 4, 1};
+    vec3 = {18, 57, 32, 20, 2, 1, 4, 78};
+    vec4 = {9, 4, 5, 6, 2, 1, 7, 134, 32};
+
     cout << endl << "Metodo de Burbuja" << endl << "---------------------" << endl;
-    OrdenaBurbuja(vec1);
-    OrdenaBurbuja(vec2);
-    OrdenaBurbuja(vec3);
-    OrdenaBurbuja(vec4);
+    ordenaBurbuja(vec1);
+    ordenaBurbuja(vec2);
+    ordenaBurbuja(vec3);
+    ordenaBurbuja(vec4);
     cout << endl;
+
+    vec1 = {7, 4, 2, 7, 8, 9, 1};
+    vec2 = {6, 9, 2, 33, 4, 2, 13, 1, 4, 1};
+    vec3 = {18, 57, 32, 20, 2, 1, 4, 78};
+    vec4 = {9, 4, 5, 6, 2, 1, 7, 134, 32};
+
+    cout << endl << "Metodo Sort merge" << endl << "---------------------" << endl;
+    mergeSort(vec1, 0, vec1.size()-1);
+    mergeSort(vec2, 0, vec2.size()-1);
+    mergeSort(vec3, 0, vec3.size()-1);
+    mergeSort(vec4, 0, vec4.size()-1);
+    cout << endl;
+
 
     cout << endl << "Busqueda Secuencial" << endl << "---------------------" << endl;
     //Busqueda Secuencial 
