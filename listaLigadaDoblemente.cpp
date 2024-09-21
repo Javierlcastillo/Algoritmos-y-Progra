@@ -6,6 +6,7 @@ class Nodo {
 public:
     int valor;
     Nodo* siguiente;
+    Nodo *anterior;
  
     Nodo(int dataValue) {
         valor = dataValue;
@@ -16,6 +17,8 @@ public:
 
 class ListaLigada {
     Nodo *cabeza;
+    Nodo *finLista;
+    int tamanio;
 public:
     ListaLigada() {
         cabeza = nullptr;
@@ -23,19 +26,15 @@ public:
     void crear(int valor) {
         if (cabeza == nullptr) {
             cabeza = new Nodo(valor);
-        
+            finLista = cabeza;
         }
         else{
-            Nodo* current = cabeza;
-            while(current->siguiente!=nullptr){
-                current = current->siguiente;
-            }
             Nodo *nuevo = new Nodo(valor);
-            current->siguiente = nuevo;
-     
-
-        
+            nuevo->anterior = finLista;
+            finLista->siguiente = nuevo;
+            finLista = nuevo;
         }
+        tamanio++;
     
     }
     void imprimeLista() {
@@ -45,10 +44,28 @@ public:
             nodoActual = nodoActual->siguiente;
         }
         cout << endl;
-
-    
-    
     }
+
+    int getElemento(int indice){
+        Nodo* nodoActual = cabeza;
+        int contador = 0;
+        for (int i = 0; i < indice-1; i++){
+            if (nodoActual != nullptr){
+                nodoActual = nodoActual-> siguiente;
+                contador++;
+            }
+        }
+        if(contador == indice-1){
+            return nodoActual->valor;
+        } else{
+            return -1;
+        }
+
+    }
+    int dameTamano(){
+        return tamanio;
+    }
+
     ~ListaLigada() {
         Nodo* nodoActual = cabeza;
         while (nodoActual) {
@@ -75,7 +92,8 @@ int main()
     lista.imprimeLista();
     lista.crear(9);
     lista.imprimeLista();
- 
+    cout << lista.getElemento(2) << endl;
+
     ListaLigada* lista2 = new ListaLigada;
     lista2->crear(2);
     lista2->crear(3);
