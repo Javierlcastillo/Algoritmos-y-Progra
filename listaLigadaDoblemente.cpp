@@ -11,6 +11,7 @@ public:
     Nodo(int dataValue) {
         valor = dataValue;
         siguiente = nullptr;
+        anterior = nullptr;
 
     }
 };
@@ -38,14 +39,13 @@ public:
     
     }
     void imprimeLista() {
-        Nodo* nodoActual = cabeza;
+        Nodo *nodoActual = cabeza;
         while (nodoActual != nullptr) {
             cout << nodoActual->valor<< " ";
             nodoActual = nodoActual->siguiente;
         }
-        cout << endl;
-    }
-
+        cout << endl;   
+    };
     int getElemento(int indice){
         Nodo* nodoActual = cabeza;
         int contador = 0;
