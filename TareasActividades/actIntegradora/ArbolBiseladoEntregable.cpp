@@ -1,3 +1,11 @@
+/*
+Arbol Biselado
+Author: Eduardo Lopez
+Comentado por: Javier Luis Castillo Solórzano
+Matricula: A01658415
+17/10/2022
+Referencias: http://algorithmtutor.com/ip-Structures/Tree/Splay-Trees/
+*/
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -430,41 +438,6 @@ public:
         biselar(nodo);
     }
 
-    NodoPtr LeerArchivo(const string& nombreArchivo) {
-        ifstream archivo(nombreArchivo);
-        string linea;
-        if(archivo.is_open()) {
-            while(getline(archivo, linea)) {
-                long long ip; 
-                istringstream iss(linea);
-                string token;
-                string iptemp;
-            
-                //procesa la fecha y la hora y la ignora
-                getline(iss, token, '|');
-
-                // Extraer la IP
-                getline(iss, token, '|');
-                istringstream ipStream(token.substr(token.find(":") + 1));
-                string dato1, dato2, dato3, dato4;
-
-                getline(ipStream, dato1, '.');
-                getline(ipStream, dato2, '.');
-                getline(ipStream, dato3, '.');
-                getline(ipStream, dato4, ' ');
-
-                iptemp = dato1 + dato2 + dato3 + dato4;
-                ip = stoll(iptemp);
-                // Insertar en el árbol
-                this->crear(ip);
-            }
-        archivo.close();
-    } else {
-        cerr << "No se pudo abrir el archivo: " << nombreArchivo << endl;
-    }
-    return this->raiz;
-}
-
 /**
  * Funcion eliminar de tipo VOID que recurre a la funciono eliminar privada de el AB, elimina
  * el nodo con la ip ingresada
@@ -485,3 +458,34 @@ public:
     }
 
 };
+
+int main() {
+    setlocale(LC_ALL, "es_ES.UTF-8");
+
+    ArbolBiselado bst;
+    bst.crear(333333333);
+    bst.crear(44);
+    bst.crear(64444447);
+    bst.crear(62222229);
+    bst.crear(4294967295);
+    bst.crear(2);
+    bst.crear(89);
+    bst.crear(41);
+    bst.crear(98);
+    bst.crear(1);
+    bst.imprimeArbol();
+    bst.buscar(4294967295);
+    bst.imprimeArbol();
+    bst.buscar(44);
+    bst.imprimeArbol();
+    bst.eliminar(333333333);
+    bst.imprimeArbol();
+    bst.eliminar(41);
+    bst.imprimeArbol();
+    bst.eliminar(98);
+    bst.eliminar(1);
+    bst.eliminar(44);
+    bst.imprimeArbol();
+    return 0;
+}
+
