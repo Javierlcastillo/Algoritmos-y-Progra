@@ -4,6 +4,7 @@ using namespace std;
 class Grafo {
     int** matriz;
     int numNodos;
+    int aristas;
 
 public:
     Grafo(int n) : numNodos(n) {
@@ -23,16 +24,23 @@ public:
     // Agregar arista dirigida desde u hacia v
     void agregarArista(int u, int v) {
         matriz[u][v] = 1;
+        aristas++;
     }
-
-//Tengo que solucionar esto
 
     // Verificar si una ruta puede ser recorrida exactamente
     bool rutaValida(int* ruta, int rutaLongitud) {
-        for(int i = 0; i < rutaLongitud; i++) {
-            if(matriz[i])
+        for(int i = 0; i < rutaLongitud-1; i++) {
+            int origen = ruta[i];
+            int destino = ruta[i+1];
+            if(matriz[origen][destino] != 1)
+                return false;
+        }   
+        return true;
+    }
+    void listaAdjacencia() {
+        for(int i = 0; i < aristas; i++) {
+            cout << matriz[i][0] << " : " << endl;
         }
-   
     }
 };
 
@@ -51,7 +59,7 @@ int main() {
         cin >> u >> v;
         grafo.agregarArista(u, v);
     }
-
+    grafo.listaAdjacencia();
     int rutaLongitud;
     cout << "Introduce la longitud de la ruta a verificar: ";
     cin >> rutaLongitud;

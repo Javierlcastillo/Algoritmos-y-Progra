@@ -16,7 +16,7 @@ public:
 
     // Verificar si una ruta puede ser recorrida exactamente
     bool rutaValida(const vector<int>& ruta) {
-        for(int i = 0; ruta.size() -1 ; i++) {
+        for(int i = 0; ruta.size(); i++) {
             int origen = ruta[i];
             int destino = ruta[i+1];
             if(matriz[origen][destino] != 1)
