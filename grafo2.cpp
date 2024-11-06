@@ -37,11 +37,7 @@ public:
         }   
         return true;
     }
-    void listaAdjacencia() {
-        for(int i = 0; i < aristas; i++) {
-            cout << matriz[i][0] << " : " << endl;
-        }
-    }
+    
 };
 
 int main() {
