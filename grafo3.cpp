@@ -47,10 +47,26 @@ vector<int> dfs(Grafo const& grafo, int inicio) {
     vector<int> recorrido;
     stack<int> pila;
 
-
+    pila.push(inicio);
+    visitado[inicio] = true;
+    while(!pila.empty()) {
+        int nodoActual = pila.top();
+        pila.pop();
+        recorrido.push_back(nodoActual);
+        for (int vecino: grafo.listaAdyacencia[nodoActual]) {
+            if (!visitado[vecino]) {
+                pila.push(vecino);
+                visitado[vecino] = true;  
+            }
+        }
+    }
  
 
     return recorrido;
+}
+
+vector<int> ordTopologico(Grafo const& grafo, int inicio) {
+    vector<int> incidencias; 
 }
 
 vector<int> bfs(Grafo const& grafo, int inicio) {
